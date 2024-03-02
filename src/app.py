@@ -9,7 +9,7 @@ def initApp():
     client = bt.client('bedrock-agent-runtime')
 
     prompt_template = """
-    Make your answer as short as possible.
+    Make your answer as elaborate as possible.
     """
 
     prompt = st.session_state.get("prompt", [{"role": "system", "content": "none"}])
@@ -26,25 +26,6 @@ def initApp():
     # Handle the user's question
     if question:
 
-        # brt = bt.client(service_name='bedrock-runtime')
-
-        # vectordb = st.session_state.get("vectordb", None)
-        # if not vectordb:
-        #     with st.message("assistant"):
-        #         st.write("You need to provide a PDF")
-        #         st.stop()
-
-        # search the vectordb for similar content in comparison to user's question
-        # search_results = vectordb.similarity_search(question, k=3)
-        # search_results
-        # pdf_extract = "/n ".join([result.page_content for result in search_results])
-
-        # updating the prompt with the extract from the database
-        # prompt[0] = {
-        #     "role": "system",
-        #     "content": prompt_template.format(pdf_extract=pdf_extract),
-        # }
-
         prompt[0] = {"role": "system", "content": prompt_template,}
 
         # append the user's question to the end of the response for history
@@ -57,8 +38,6 @@ def initApp():
             bot_response = st.empty()
             bot_response.write("...")
 
-        print(prompt[0]['content'] + prompt[len(prompt) - 1]['content'])
-
         # format the API 
         UBotC_agentId = 'Y4WJ0YT1MQ'
         testAliasId ='TSTALIASID'
@@ -67,21 +46,10 @@ def initApp():
             agentAliasId = testAliasId,
             sessionId = 'attempt1',
             inputText = prompt[0]['content'] + prompt[len(prompt) - 1]['content']
-        )    
-        
-        # body = json.dumps({
-        #     "prompt": "\n\nHuman: " + prompt[0]['content'] + prompt[len(prompt) - 1]['content'] + "\n\nAssistant:",
-        #     "max_tokens_to_sample": 300,
-        #     "temperature": 0.1,
-        #     "top_p": 0.9,
-        # })
-
-        # load request from model
-        # response = client.invoke_model(body = body, modelId = 'anthropic.claude-v2:1', accept = 'application/json', contentType = 'application/json')
-        # response_body = json.loads(invoke_response.get('body').read())
+        )
 
         # get the response and write it
-        text = ""
+        text = "No response..."
         for chunk in invoke_response['completion']:
             text += chunk["chunk"]["bytes"].decode("utf-8")
         # text = response_body.get('completion')
@@ -102,7 +70,7 @@ def initStreamlit():
     # information
     st.markdown(
     """ 
-        ####  Chat with a bot trained on UBC courses! Ask questions that you might 
+        ####  Chat with a bot trained on UBC courses! Ask questions that you might have about any UBC course we will try to answer as best we can!
         ----
     """
     )
