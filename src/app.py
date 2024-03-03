@@ -11,7 +11,11 @@ def initApp():
     client = bt.client('bedrock-agent-runtime', 
                       config=config)
 
-    prompt_template = """"""
+    prompt_template = """
+    Make it as elaborate as possible.
+
+    Remove <b> and </b> if possible.
+    """
 
     prompt = st.session_state.get("prompt", [{"role": "system", "content": "none"}])
 
@@ -41,7 +45,7 @@ def initApp():
 
         # format the API 
         UBotC_agentId = 'Y4WJ0YT1MQ'
-        testAliasId ='TSTALIASID'
+        testAliasId ='1XDRVQJNUG' #changed to ubotcv3 from TSTALIASID
         invoke_response = client.invoke_agent(
             agentId = UBotC_agentId,
             agentAliasId = testAliasId,
@@ -66,7 +70,7 @@ def initApp():
 def initStreamlit():
 
     # initiate title
-    st.title("UBotC")
+    st.title("UBotC 🤓☝️")
 
     # information
     st.markdown(
