@@ -1,7 +1,6 @@
 import streamlit as st
 import boto3 as bt
 from botocore.config import Config
-import json
 
 def initApp():
 
