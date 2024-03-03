@@ -45,7 +45,7 @@ def initApp():
 
         # format the API 
         UBotC_agentId = 'Y4WJ0YT1MQ'
-        testAliasId ='1XDRVQJNUG' #changed to ubotcv3 from TSTALIASID
+        testAliasId ='YY5R7EC1DY' #changed to ubotcv3 from TSTALIASID
         invoke_response = client.invoke_agent(
             agentId = UBotC_agentId,
             agentAliasId = testAliasId,
