@@ -8,7 +8,8 @@ def initApp():
     initStreamlit()
 
     config = Config(read_timeout=1000)
-    client = bt.client('bedrock-agent-runtime', 
+    client = bt.client('bedrock-agent-runtime',
+                        region_name='us-west-2',
                       config=config)
 
     prompt_template = """
