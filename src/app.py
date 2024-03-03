@@ -1,16 +1,17 @@
 import streamlit as st
 import boto3 as bt
+from botocore.config import Config
 import json
 
 def initApp():
 
     initStreamlit()
 
-    client = bt.client('bedrock-agent-runtime')
+    config = Config(read_timeout=1000)
+    client = bt.client('bedrock-agent-runtime', 
+                      config=config)
 
-    prompt_template = """
-    Make your answer as elaborate as possible.
-    """
+    prompt_template = """"""
 
     prompt = st.session_state.get("prompt", [{"role": "system", "content": "none"}])
 
@@ -49,7 +50,7 @@ def initApp():
         )
 
         # get the response and write it
-        text = "No response..."
+        text = ""
         for chunk in invoke_response['completion']:
             text += chunk["chunk"]["bytes"].decode("utf-8")
         # text = response_body.get('completion')
